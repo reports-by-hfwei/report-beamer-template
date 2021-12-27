@@ -1,8 +1,12 @@
 % preamble.tex
 
+%%%%%%%%%%%%%%% Chinese %%%%%%%%%%%%%%%
+%%%%% Uncomment the following lines to use Chinese
 % \usepackage{xeCJK}
 % \usepackage{fontspec}
+%%%%%%%%%%%%%%% Chinese %%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%% Theme %%%%%%%%%%%%%%%
 \usetheme{CambridgeUS} % try Madrid
 \usecolortheme{beaver} % try beaver, dolphin, seahorse
 % \usefonttheme[onlymath]{serif} % try "professionalfonts"
@@ -19,18 +23,65 @@
 \setbeamertemplate{enumerate items}[default]
 
 \renewcommand*{\thefootnote}{\alph{footnote}}
+%%%%%%%%%%%%%%% Theme %%%%%%%%%%%%%%%
 
 \usepackage{graphicx, subcaption}
 
 \usepackage{amssymb, pifont}
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
-\usepackage{xcolor}
 
+%%%%%%%%%%%%%%% Algorithms %%%%%%%%%%%%%%%
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+% for two-column algorithms
+% see https://tex.stackexchange.com/a/159431.
+\usepackage{varwidth}
+
+\newcommand{\code}[2]{#1:#2}
+\newcommand{\hStatex}[0]{\vspace{4pt}}
+\renewcommand\algorithmicthen{}
+\renewcommand\algorithmicdo{}
+
+\algblockdefx[upon]{When}{EndWhen}%
+  [3][Unknown]{\textbf{when for every} #3 \textbf{received a quorum of} #1(#2)}%
+  {\textbf{end}}
+
+\algblockdefx[upon]{WhenReceive}{EndWhenReceive}%
+  [1][Unknown]{\textbf{when received} #1}%
+  {\textbf{end}}
+
+\algblockdefx[upon]{Upon}{EndUpon}%
+  [1][Unknown]{\textbf{upon} #1}%
+  {\textbf{end upon}}
+
+% Remove the end blank line when using noend in conjunction with custom blocks
+% See https://tex.stackexchange.com/a/172065
+\makeatletter
+\ifthenelse{\equal{\ALG@noend}{t}}%
+  {\algtext*{EndWhen}}
+  {}%
+\makeatother
+
+\makeatletter
+\ifthenelse{\equal{\ALG@noend}{t}}%
+  {\algtext*{EndWhenReceive}}
+  {}%
+\makeatother
+
+\makeatletter
+\ifthenelse{\equal{\ALG@noend}{t}}%
+  {\algtext*{EndUpon}}
+  {}%
+\makeatother
+%%%%%%%%%%%%%%% Algorithms %%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% Theorems %%%%%%%%%%%%%%%
 % theorems (global numbering)
 \theoremstyle{definition}
 \newtheorem{property}[theorem]{Property}
 \newtheorem{assumption}{\textsc{Assumption}}
+%%%%%%%%%%%%%%% Theorems %%%%%%%%%%%%%%%
 
 \usepackage{caption}
 \DeclareCaptionLabelSeparator{none}{}
@@ -40,11 +91,11 @@
 \let\@@magyar@captionfix\relax
 \makeatother
 
+%%%%%%%%%%%%%%% Tables %%%%%%%%%%%%%%%
 \newcommand{\incell}[2]{\begin{tabular}[c]{@{}c@{}}#1\\[3pt] #2\end{tabular}}
+%%%%%%%%%%%%%%% Tables %%%%%%%%%%%%%%%
 
-% \renewcommand\figurename{图:\;}
-% \renewcommand\tablename{表:\;}
-
+%%%%%%%%%%%%%%% Figures %%%%%%%%%%%%%%%
 % for fig without caption: #1: width/size; #2: fig file
 \newcommand{\fig}[2]{
   \begin{figure}[htp]
@@ -62,10 +113,18 @@
   \end{figure}
 }
 
+%%%%% For Chinese %%%%%
+% \renewcommand\figurename{图:\;}
+% \renewcommand\tablename{表:\;}
+%%%%% For Chinese %%%%%
+%%%%%%%%%%%%%%% Figures %%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% TiKZ %%%%%%%%%%%%%%%
 \usepackage[linewidth = 1pt, framemethod = TikZ]{mdframed}
 \mdfsetup{frametitlealignment=\center}
+%%%%%%%%%%%%%%% TiKZ %%%%%%%%%%%%%%%
 
-% for citation
+%%%%%%%%%%%%%%% Citation %%%%%%%%%%%%%%%
 % try "backend = bibtex", "backend = biber"
 \usepackage[natbib = true, backend = biber, style = authoryear, maxbibnames = 99]{biblatex}
 \setbeamertemplate{bibliography item}[article]
@@ -73,9 +132,13 @@
 % \addbibresource{xxx.bib}
 
 \newcommand{\ncite}[1]{\violet{\footnotesize [\cite{#1}]}}
+%%%%%%%%%%%%%%% Citation %%%%%%%%%%%%%%%
 
-% colors
+%%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%
+\usepackage{xcolor}
+
 \definecolor{DarkRed}{rgb}{0.55, 0.0, 0.0}
+
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\green}[1]{\textcolor{green}{#1}}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
@@ -88,7 +151,9 @@
 \newcommand{\orange}[1]{\textcolor{orange}{#1}}
 
 \newcommand{\hl}[2]{\fcolorbox{#1}{#1!60}{#2}}
+%%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%% thankyou %%%%%%%%%%%%%%%
 \newcommand{\thankyou}{
   \begin{frame}[noframenumbering]
     \begin{center}
@@ -98,3 +163,4 @@
     \end{center}
   \end{frame}
 }
+%%%%%%%%%%%%%%% thankyou %%%%%%%%%%%%%%%
